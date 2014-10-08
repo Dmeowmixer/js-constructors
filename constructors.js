@@ -7,9 +7,49 @@
  * @param {string} description  A short description of the spell.
  * @property {string} name
  * @property {number} cost
- * @property {string} description
- */
+ * @property {string} description*/
 
+function Spell(name,cost,description){
+   //this.property
+   this.name = name;
+   this.cost = cost;
+   this.description = description;
+   
+   //this.method
+   this.printDetails = function() {
+     return this.name + " " + this.cost + " " + this.description;
+ 
+   }
+}
+//var instance 1
+   var fear = new Spell("Fear", 10, "Scary");
+/*
+    var fear = new Spell();
+    fear.name = "Fear";
+    fear.cost = 10;
+    fear.description = "Scares everyone shitless in a 50 yard diameter around the player." ;   
+*/
+   console.log(fear.printDetails());
+
+
+//function Spell(name,cost,description){
+  /* var Spell = function(name,cost,description){
+   this.name = name;
+   this.cost = cost;
+   this.description = description;
+      function printDetails(){
+         Spell.call(name,cost,description);
+      }
+      }
+Fear.prototype:Spell.prototype;
+// body...
+var Fear = new Spell();
+Fear.name = "Fear";
+Fear.cost = 50;
+Fear.discription = "Scares everyone shitless in a 50 yard diameter around the player."    
+
+printDetails(fear)
+*/
   /**
    * Print out all spell details and format it nicely.
    * The format doesnt matter, as long as it contains the spell name, cost, and description.
