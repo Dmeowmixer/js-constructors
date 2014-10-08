@@ -32,24 +32,9 @@ function Spell(name,cost,description){
    fear.printDetails();
 
 
-//function Spell(name,cost,description){
-  /* var Spell = function(name,cost,description){
-   this.name = name;
-   this.cost = cost;
-   this.description = description;
-      function printDetails(){
-         Spell.call(name,cost,description);
-      }
-      }
-Fear.prototype:Spell.prototype;
-// body...
-var Fear = new Spell();
-Fear.name = "Fear";
-Fear.cost = 50;
-Fear.discription = "Scares everyone shitless in a 50 yard diameter around the player."    
 
-printDetails(fear)
-*/
+
+
   /**
    * Print out all spell details and format it nicely.
    * The format doesnt matter, as long as it contains the spell name, cost, and description.
@@ -80,6 +65,13 @@ printDetails(fear)
  * @property {number} damage
  * @property {string} description
  */
+function DamageSpell(name,cost,damage,description){
+  Spell.call(this,name,cost,description)
+  this.damage = damage;
+}
+DamageSpell.prototype = Object.create(Spell.prototype);
+var shadowblast = new DamageSpell ("ShadowBlast", 50, 100, "A blast from darkness, dealing damage based on the darkness surrounding opponent.");
+
 
 /**
  * Now that you've created some spells, let's create
@@ -94,7 +86,12 @@ printDetails(fear)
  * @property {mana} mana
  * @property {boolean} isAlive  Default value should be `true`.
  */
+function Spellcaster(name,health,mana){
 
+   this.name = name;
+   this.health = health;
+   this.mana = mana;
+}
   /**
    * The spellcaster loses health equal to `damage`.
    * Health should never be negative.
@@ -104,6 +101,19 @@ printDetails(fear)
    * @name inflictDamage
    * @param  {number} damage  Amount of damage to deal to the spellcaster
    */
+this.isAlive = true;
+this.health = this.health - damage;
+if (this.health <= 100){
+   this.isAlive = true
+
+}
+
+else if (this.health < 0){
+   this.health = 0;
+}
+else if (this.health = 0){
+   this.isAlive = false
+}
 
   /**
    * Reduces the spellcaster's mana by `cost`.
