@@ -17,19 +17,19 @@ function Spell(name,cost,description){
    
    //this.method
    this.printDetails = function() {
-     return this.name + " " + this.cost + " " + this.description;
+     console.log(this.name + "  which costs " + this.cost + " points. Fear " + this.description);
  
    }
 }
 //var instance 1
-   var fear = new Spell("Fear", 10, "Scary");
-/*
+//   var fear = new Spell("Fear", 10, "Scary");
+
     var fear = new Spell();
     fear.name = "Fear";
     fear.cost = 10;
-    fear.description = "Scares everyone shitless in a 50 yard diameter around the player." ;   
-*/
-   console.log(fear.printDetails());
+    fear.description = "scares the shit out of everyone in a 50 yard diameter around the player." ;   
+
+   fear.printDetails();
 
 
 //function Spell(name,cost,description){
