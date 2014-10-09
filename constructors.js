@@ -17,13 +17,10 @@ function Spell(name,cost,description){
    
    //this.method
    this.printDetails = function() {
-     console.log(this.name + "  which costs " + this.cost + " points. Fear " + this.description);
+     console.log(this.name + " " + this.cost + " points. Fear " + this.description);
  
    }
 }
-//var instance 1
-//   var fear = new Spell("Fear", 10, "Scary");
-
     var fear = new Spell();
     fear.name = "Fear";
     fear.cost = 10;
@@ -31,93 +28,51 @@ function Spell(name,cost,description){
 
    fear.printDetails();
 
-
-
-
-
-  /**
-   * Print out all spell details and format it nicely.
-   * The format doesnt matter, as long as it contains the spell name, cost, and description.
-   * @name printDetails
-   */
-
-/**
- * A spell that deals damage.
- * We want to keep this code DRY (Don't Repeat Yourself).
- *
- * So you should use `Spell.call()` to assign the spell name, cost, and description.
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
- *
- * In addition, you will also want to assign `DamageSpell.prototype`
- * a value so that it inherits from `Spell`.
- * Make sure to call this OUTSIDE of the function declaration.
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
- *
- * @name DamageSpell
- * @param {string} name         The name of the spell.
- * @param {number} cost         The amount needed to cast this spell.
- * @param {number} damage       The amount of damage this spell deals.
- * @param {string} description  A short description of the spell.
- * @property {string} name
- * @property {number} cost
- * @property {number} damage
- * @property {string} description
- */
 function DamageSpell(name,cost,damage,description){
   Spell.call(this,name,cost,description)
   this.damage = damage;
 }
+
 DamageSpell.prototype = Object.create(Spell.prototype);
 var shadowblast = new DamageSpell ("ShadowBlast", 50, 100, "A blast from darkness, dealing damage based on the darkness surrounding opponent.");
 
-
-/**
- * Now that you've created some spells, let's create
- * `Spellcaster` objects that can use them!
- *
- * @name Spellcaster
- * @param {string} name         The spellcaster's name.
- * @param {number} health       The spellcaster's health points.
- * @param {number} mana         The spellcaster's mana points, used for casting spells.
- * @property {string} name
- * @property {number} health
- * @property {mana} mana
- * @property {boolean} isAlive  Default value should be `true`.
- */
 function Spellcaster(name,health,mana){
 
    this.name = name;
    this.health = health;
    this.mana = mana;
+   this.isAlive = true;
 }
+
+   var ranson = new Spellcaster;
+   ranson.name = "Ranson";
+   ranson.health = 100;
+   ranson.mana = 200;
+   ranson.isAlive = true;
+
+
+   Spellcaster.prototype.inflictDamage = function(damage){ 
+   
+      this.health = this.health - damage;
+     
+
+      if (this.health < 0){
+         this.health = 0;
+       }
+      if (this.health === 0){
+         this.isAlive = false;
+       }
+}
+   Spellcaster.prototype.spendMana = function(cost){
+      if (this.mana > cost){
+         true;
+      }
+      else if (this.mana < cost){
+         false;
+      }
+   }
   /**
-   * The spellcaster loses health equal to `damage`.
-   * Health should never be negative.
-   * If the spellcaster's health drops to 0,
-   * its `isAlive` property should be set to `false`.
-   *
-   * @name inflictDamage
-   * @param  {number} damage  Amount of damage to deal to the spellcaster
-   */
-this.isAlive = true;
-this.health = this.health - damage;
-if (this.health <= 100){
-   this.isAlive = true
-
-}
-
-else if (this.health < 0){
-   this.health = 0;
-}
-else if (this.health = 0){
-   this.isAlive = false
-}
-
-  /**
-   * Reduces the spellcaster's mana by `cost`.
-   * Mana should only be reduced only if there is enough mana to spend.
+   this.health = this.damage - this.health;nly be reduced only if there is enough mana to spend.
    *
    * @name spendMana
    * @param  {number} cost      The amount of mana to spend.
