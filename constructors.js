@@ -58,26 +58,46 @@ function Spellcaster(name,health,mana){
 
       if (this.health < 0){
          this.health = 0;
-       }
+       }      
       if (this.health === 0){
          this.isAlive = false;
        }
 }
    Spellcaster.prototype.spendMana = function(cost){
-      if (this.mana > cost){
-         true;
+      if (this.mana >= cost){
+       this.mana = this.mana - cost;
+         return true;
+         
       }
       else if (this.mana < cost){
-         false;
+         return false;
       }
    }
-  /**
-   this.health = this.damage - this.health;nly be reduced only if there is enough mana to spend.
-   *
+    Spellcaster.prototype.invoke = function(spell,target){
+      
+      if (spell instanceof Spell){
+       if (spell instanceof DamageSpell){
+        if (target instanceof Spellcaster){
+                   
+         return true;
+        } 
+        else {
+          return false;
+        } 
+       }
+
+        return this.spendMana(spell.cost);
+      }  
+      else {
+        return false;
+      }
+}
+
+   /*
    * @name spendMana
    * @param  {number} cost      The amount of mana to spend.
    * @return {boolean} success  Whether mana was successfully spent.
-   */
+   */ 
 
   /**
    * Allows the spellcaster to cast spells.
